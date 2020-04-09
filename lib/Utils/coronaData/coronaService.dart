@@ -16,13 +16,3 @@ Future<List<CoronaData>> fetchCoronaDatas(http.Client client) async {
 
   return parseCoronaDatas(response.body);
 }
-
-Future<CoronaData> fetchPost() async {
-  final response =
-      await http.get('https://coronavirus-19-api.herokuapp.com/countries');
-  if (response.statusCode == 200) {
-    return CoronaData.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load post');
-  }
-}
