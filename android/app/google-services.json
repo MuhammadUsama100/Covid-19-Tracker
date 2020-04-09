@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "172582215457",
+    "firebase_url": "https://coro-211b0.firebaseio.com",
+    "project_id": "coro-211b0",
+    "storage_bucket": "coro-211b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172582215457:android:14c3f3c83256faf6bfa860",
+        "android_client_info": {
+          "package_name": "com.example.coronavirus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172582215457-2gf9sbkhkphm17hgfleb3ljn6070uutk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6DGFWMdQyV_35DG33Og5EiVtYyQNJfuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172582215457-2gf9sbkhkphm17hgfleb3ljn6070uutk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
