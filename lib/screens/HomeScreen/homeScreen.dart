@@ -63,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 MapCard(),
                 ListTileCard(
-                  cases: this.coronaData[0].cases,
-                  country: this.coronaData[0].country,
+                  cases: this.coronaData[7].cases,
+                  country: this.coronaData[7].country,
                   logo: Icon(Icons.flag),
                 ),
                 ListTileCard(
@@ -77,8 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTileCard(
-                  cases: this.coronaData[1].cases,
-                  country: this.coronaData[1].country,
+                  cases: this.coronaData[8].cases,
+                  country: this.coronaData[8].country,
                   logo: Container(
                     child: Flags.getFullFlag('US', 100, null),
                     width: 20,
@@ -86,8 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTileCard(
-                  cases: this.coronaData[2].cases,
-                  country: this.coronaData[2].country,
+                  cases: this.coronaData[9].cases,
+                  country: this.coronaData[9].country,
                   logo: Container(
                     child: Flags.getFullFlag('ES', 100, null),
                     width: 20,

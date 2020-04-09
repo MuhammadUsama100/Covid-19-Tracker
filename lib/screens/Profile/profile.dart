@@ -62,7 +62,14 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text("Threat Level : ",
+                              style: TextStyle(color: Colors.white)),
+                          Text("ZERO", style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
                     ],
                   )),
                 ),
@@ -73,12 +80,64 @@ class _UserProfileState extends State<UserProfile> {
       ),
       body: ListView(
         children: <Widget>[
-          ListTile(
-            title: Text("qwertyu"),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
+            child: Card(
+              elevation: 2,
+              child: Container(
+                height: 85,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.insert_chart),
+                    title: Text("Change Status",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ),
+            ),
           ),
-          Divider(
-            height: 35,
-            thickness: 1,
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            child: Card(
+              elevation: 2,
+              child: Container(
+                height: 85,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.score),
+                    title: Text("Test Covid-19 ",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    subtitle: Text(
+                        "Test based on symptoms and historical data analysis",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            child: Card(
+              elevation: 2,
+              child: Container(
+                height: 85,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.score),
+                    title: Text("Instructions",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    subtitle: Text(
+                        "What should you do with each threat level and under CoronaVirus ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
