@@ -51,13 +51,14 @@ class AuthService {
     Storage.setValue("UserID", user.uid);
     Storage.setValue("UserName", user.displayName);
     Storage.setValue("UserEmail", user.email);
+    Storage.setValue("Phone", user.phoneNumber);
+    Storage.setValue("Image", user.photoUrl);
+    Storage.setValue("time", DateTime.now().second.toString());
 
     return ref.setData({
       "uid": user.uid,
       "email": user.email,
       "name": user.displayName,
-      "lastSeen": DateTime.now(),
-      "friends": []
     });
   }
 

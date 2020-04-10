@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/coronaData/coronaService.dart';
+import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/Drawer/drawer.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flag/flag.dart';
 
@@ -17,12 +20,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer timer;
+  Timer timeGps;
+  Timer submit;
+  final Firestore _db = Firestore();
   List<CoronaData> coronaData;
   CoronaData pakistan;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     if (this.coronaData == null) {
       print("object");
       initialize().then((val) {
@@ -37,6 +44,30 @@ class _HomeScreenState extends State<HomeScreen> {
         initialize();
         setState(() {});
       });
+    gpsLocal();
+    //18000
+    submit = Timer.periodic(Duration(seconds: 50), (Timer t) async {
+      DocumentReference ref =
+          _db.collection("user").document(Storage.getValue("UserID"));
+
+      ref.updateData({"data": Storage.getlocal("Local")});
+    });
+  }
+
+  gpsLocal() async {
+    timeGps = Timer.periodic(Duration(seconds: 20), (Timer t) async {
+      Position position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      List<String> str = Storage.getlocal("Local");
+      str.add(position.latitude.toString() +
+          " " +
+          position.longitude.toString() +
+          " " +
+          DateTime.now().second.toString());
+      print(str);
+      Storage.setlocal("Local", str);
+      str.forEach((f) => print(f));
+    });
   }
 
   initialize() async {
