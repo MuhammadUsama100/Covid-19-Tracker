@@ -30,21 +30,11 @@ class Storage {
   }
 
   static parse(String local) {
-    Track track =  new Track();
-    bool flag = false;
-    bool flag2 = false;
-    for (int i = 0; i < local.length; i++) {
-      if (flag == true && local[i] == " " || flag2) {
-        track.time = local[i];
-        flag2 = true;
-        flag = false;
-      } else if (local[i] == " " || flag) {
-        track.lat = local[i];
-        flag = true;
-      } else {
-        track.long = local[i];
-      }
-    }
+    List<String> list = local.split(" ");
+    Track track = new Track();
+    track.long = list[0];
+    track.lat = list[1];
+    track.time = list[2];
     return track;
   }
 

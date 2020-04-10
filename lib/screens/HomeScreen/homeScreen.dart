@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronavirus/Models/friend.dart';
+import 'package:coronavirus/Models/tracker.dart';
 import 'package:coronavirus/Utils/coronaData/coronaService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
@@ -22,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer timer;
   Timer timeGps;
   Timer submit;
+  List<Friend> friend;
   final Firestore _db = Firestore();
   List<CoronaData> coronaData;
   CoronaData pakistan;
@@ -51,6 +54,56 @@ class _HomeScreenState extends State<HomeScreen> {
           _db.collection("user").document(Storage.getValue("UserID"));
 
       ref.updateData({"data": Storage.getlocal("Local")});
+      QuerySnapshot querySnapshot =
+          await Firestore.instance.collection("user").getDocuments();
+      querySnapshot.documents.forEach((doc) {
+        List list = doc["data"];
+        List localList = Storage.getlocal("Local");
+        list.forEach((val) {
+          Track tack = Storage.parse(val.toString());
+          localList.forEach((locVal) async {
+            print("object");
+            Track localtack = Storage.parse(locVal.toString());
+            //print(localtack.time);
+            // if ((DateTime.parse(localtack.time).millisecondsSinceEpoch -
+            //             DateTime.parse(tack.time).millisecondsSinceEpoch)
+            //         .abs() <
+            //     1000) {
+            //   print("usama1");
+            //   if ((int.parse(localtack.lat) - int.parse(tack.lat)).abs() < 3 &&
+            //       (int.parse(localtack.long) - int.parse(tack.long)).abs() <
+            //           3 &&
+            //       doc["email"] != Storage.getValue("UserEmail")) {
+            //     print("usama1");
+            //     print("usama1");
+
+            //     // add to list  ;
+
+            //     var friends = await ref.get();
+            //     List list = friends.data["friends"];
+            //     bool alreadyFriend = false;
+            //     print(doc["email"]);
+            //     list.forEach((f) {
+            //       if (doc["email"].toString() == f.email.toString()) {
+            //         alreadyFriend = true;
+            //       }
+            //     });
+            //     if (!alreadyFriend) {
+            //       list.add({
+            //         "logo": doc["logo"],
+            //         "name": doc["name"],
+            //         "email": doc["email"],
+            //         "status": doc["status"]
+            //       });
+            //       ref.updateData({"friends": list});
+            //     }
+            // }
+            // time compared
+            print("part1");
+            // }
+          });
+        });
+      });
     });
   }
 
@@ -63,10 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
           " " +
           position.longitude.toString() +
           " " +
-          DateTime.now().second.toString());
-      print(str);
+          DateTime.now().toString());
+      // print(str);
       Storage.setlocal("Local", str);
-      str.forEach((f) => print(f));
+      // str.forEach((f) => print(f));
     });
   }
 
