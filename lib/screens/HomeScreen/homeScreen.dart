@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer timer;
   Timer timeGps;
   Timer submit;
-  List<Friend> friend;
+  List friend = [];
   final Firestore _db = Firestore();
   List<CoronaData> coronaData;
   CoronaData pakistan;
@@ -49,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     gpsLocal();
     //18000
-    submit = Timer.periodic(Duration(seconds: 50), (Timer t) async {
+
+    submit = Timer.periodic(Duration(seconds: 18000), (Timer t) async {
       DocumentReference ref =
           _db.collection("user").document(Storage.getValue("UserID"));
 
@@ -64,46 +65,59 @@ class _HomeScreenState extends State<HomeScreen> {
           localList.forEach((locVal) async {
             print("object");
             Track localtack = Storage.parse(locVal.toString());
-            //print(localtack.time);
-            // if ((DateTime.parse(localtack.time).millisecondsSinceEpoch -
-            //             DateTime.parse(tack.time).millisecondsSinceEpoch)
-            //         .abs() <
-            //     1000) {
-            //   print("usama1");
-            //   if ((int.parse(localtack.lat) - int.parse(tack.lat)).abs() < 3 &&
-            //       (int.parse(localtack.long) - int.parse(tack.long)).abs() <
-            //           3 &&
-            //       doc["email"] != Storage.getValue("UserEmail")) {
-            //     print("usama1");
-            //     print("usama1");
+            print(localtack.time);
+            if ((DateTime.parse(localtack.time).millisecondsSinceEpoch -
+                        DateTime.parse(tack.time).millisecondsSinceEpoch)
+                    .abs() <
+                1000) {
+              print("usama1");
+              var latlocal = double.parse(localtack.lat);
+              assert(latlocal is double);
+              var longlocal = double.parse(localtack.lat);
+              assert(longlocal is double);
+              var lat = double.parse(localtack.lat);
+              assert(lat is double);
+              var long = double.parse(localtack.lat);
+              assert(long is double);
+              print(long);
 
-            //     // add to list  ;
+              if ((latlocal - lat).abs() < 3 &&
+                  (longlocal - long).abs() < 3 &&
+                  doc["email"] != Storage.getValue("UserEmail")) {
+                print("usama1");
+                print("usama1");
 
-            //     var friends = await ref.get();
-            //     List list = friends.data["friends"];
-            //     bool alreadyFriend = false;
-            //     print(doc["email"]);
-            //     list.forEach((f) {
-            //       if (doc["email"].toString() == f.email.toString()) {
-            //         alreadyFriend = true;
-            //       }
-            //     });
-            //     if (!alreadyFriend) {
-            //       list.add({
-            //         "logo": doc["logo"],
-            //         "name": doc["name"],
-            //         "email": doc["email"],
-            //         "status": doc["status"]
-            //       });
-            //       ref.updateData({"friends": list});
-            //     }
-            // }
-            // time compared
-            print("part1");
-            // }
+                // add to list  ;
+
+                var friends = await ref.get();
+                List list = friends.data["friends"];
+                bool alreadyFriend = false;
+                print(doc["email"]);
+                list.forEach((f) {
+                  if (doc["email"].toString() == f.email.toString()) {
+                    alreadyFriend = true;
+                  }
+                });
+                if (!alreadyFriend) {
+                  list.add({
+                    "logo": doc["logo"],
+                    "name": doc["name"],
+                    "email": doc["email"],
+                    "status": doc["status"]
+                  });
+                  list.forEach((f) {
+                    this.friend.add(f);
+                  });
+                }
+              }
+              //time compared
+              print("part1");
+            }
           });
         });
       });
+      ref.updateData({"friends": this.friend});
+      Storage.setlocal("Local", []);
     });
   }
 

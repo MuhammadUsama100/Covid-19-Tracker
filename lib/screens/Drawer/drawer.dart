@@ -1,4 +1,5 @@
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/screens/InterectionList/interactionList.dart';
 import 'package:coronavirus/screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:drawer_component/drawer_component.dart';
@@ -31,7 +32,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         DrawerTile(
           name: "InterectionList",
           textOverflow: TextOverflow.ellipsis,
-          child: UserProfile(),
+          child: InterctionList(),
           leading: Icon(Icons.people),
           tileSize: 10,
           dividerheight: 5,

@@ -30,11 +30,12 @@ class Storage {
   }
 
   static parse(String local) {
+    print(local);
     List<String> list = local.split(" ");
     Track track = new Track();
     track.long = list[0];
     track.lat = list[1];
-    track.time = list[2];
+    track.time = list[2] + " " + list[3];
     return track;
   }
 
