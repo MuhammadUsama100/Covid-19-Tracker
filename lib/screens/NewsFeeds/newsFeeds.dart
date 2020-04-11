@@ -28,7 +28,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
   fetchData() async {
     print("usama");
     DocumentReference ref =
-        _db.collection("user").document(Storage.getValue("UserID"));
+        _db.collection("news").document("Y2nPEPxk8MgHrCOzrBY5");
 
     this.data = await ref.get();
   }
@@ -44,7 +44,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
             ? Center(child: Container(child: CircularProgressIndicator()))
             : Container(
                 child: ListView.builder(
-                    itemCount: this.data.NewesFeedss.length,
+                    itemCount: this.data["news"].length,
                     itemBuilder: (context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -59,7 +59,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
                                       child: Text(
-                                          this.data.NewesFeedss[index].title,
+                                          this.data["news"][index]["title"],
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold)),
@@ -67,14 +67,12 @@ class _NewesFeedsState extends State<NewesFeeds> {
                                   ),
                                   Container(
                                     child: Image.network(
-                                        this.data.NewesFeedss[index].thumbnail),
+                                        this.data.data["news"][index]["image"]),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(this
-                                        .data
-                                        .NewesFeedss[index]
-                                        .description),
+                                    child: Text(
+                                        this.data.data["news"][index]["dis"]),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -82,8 +80,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
                                       onTap: () async {
                                         var url = this
                                             .data
-                                            .NewesFeedss[index]
-                                            .applink
+                                            .data["news"][index]["url"]
                                             .toString();
                                         if (await canLaunch(url)) {
                                           await launch(url);
@@ -92,7 +89,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
                                         }
                                       },
                                       child: Text(
-                                          this.data.NewesFeedss[index].applink,
+                                          this.data.data["news"][index]["url"],
                                           style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,

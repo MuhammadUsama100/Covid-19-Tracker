@@ -1,5 +1,7 @@
+import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/InterectionList/interactionList.dart';
+import 'package:coronavirus/screens/NewsFeeds/newsFeeds.dart';
 import 'package:coronavirus/screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:drawer_component/drawer_component.dart';
@@ -18,11 +20,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
       children: <Widget>[
         DrawerLogo(
           avatarBackgroundColor: Colors.white,
-          circleAvatarImageurl:
-              "https://i.ytimg.com/vi/sK-8k1Dq1xM/hqdefault.jpg",
+          circleAvatarImageurl: Storage.getValue("Image"),
           checkNetworkAssets: true,
           color: Colors.blue,
-          text: "MuhammadUsama",
+          text: Storage.getValue("UserName"),
           gradientCheck: true,
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
@@ -52,7 +53,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         DrawerTile(
           name: "NewsFeed",
           textOverflow: TextOverflow.ellipsis,
-          child: UserProfile(),
+          child: NewesFeeds(),
           leading: Icon(Icons.pages),
           tileSize: 10,
           dividerheight: 5,
