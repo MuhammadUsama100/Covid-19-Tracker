@@ -2,9 +2,12 @@ import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/InterectionList/interactionList.dart';
 import 'package:coronavirus/screens/NewsFeeds/newsFeeds.dart';
+import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
+import 'package:coronavirus/screens/Precautions/precautions.dart';
 import 'package:coronavirus/screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:drawer_component/drawer_component.dart';
+import 'package:coronavirus/screens/Donations/Donations.dart';
 
 class DrawerScreen extends StatefulWidget {
   DrawerScreen({Key key}) : super(key: key);
@@ -74,6 +77,46 @@ class _DrawerScreenState extends State<DrawerScreen> {
           name: "About",
           textOverflow: TextOverflow.ellipsis,
           child: UserProfile(),
+          leading: Icon(Icons.description),
+          tileSize: 10,
+          dividerheight: 5,
+          dividerThickness: 1,
+          dividercolor: Colors.black,
+        ),
+        DrawerTile(
+          name: "Pakistan Corona",
+          textOverflow: TextOverflow.ellipsis,
+          child: PakistanMap(),
+          leading: Icon(Icons.description),
+          tileSize: 10,
+          dividerheight: 5,
+          dividerThickness: 1,
+          dividercolor: Colors.black,
+        ),
+        DrawerTile(
+          name: "Pakistan Corona",
+          textOverflow: TextOverflow.ellipsis,
+          child: DonationsScreen(),
+          leading: Icon(Icons.description),
+          tileSize: 10,
+          dividerheight: 5,
+          dividerThickness: 1,
+          dividercolor: Colors.black,
+        ),
+        DrawerTile(
+          name: "Precautions",
+          textOverflow: TextOverflow.ellipsis,
+          child: Precautions(),
+          leading: Icon(Icons.description),
+          tileSize: 10,
+          dividerheight: 5,
+          dividerThickness: 1,
+          dividercolor: Colors.black,
+        ),
+        DrawerTile(
+          name: "Entertainment",
+          textOverflow: TextOverflow.ellipsis,
+          child: Precautions(),
           leading: Icon(Icons.description),
           tileSize: 10,
           dividerheight: 5,

@@ -37,7 +37,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("NewesFeeds"),
+          title: Text("News Feeds"),
           backgroundColor: theamColor,
         ),
         body: this.data == null
@@ -70,10 +70,14 @@ class _NewesFeedsState extends State<NewesFeeds> {
                                         this.data.data["news"][index]["image"]),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                        this.data.data["news"][index]["dis"]),
-                                  ),
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                          child: Text(this.data.data["news"]
+                                              [index]["dis"]),
+                                        ),
+                                      )),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: InkWell(

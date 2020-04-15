@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });
       ref.updateData({"friends": this.friend});
-      Storage.setlocal("Local", []);
+      // Storage.setlocal("Local", []);
     });
   }
 
