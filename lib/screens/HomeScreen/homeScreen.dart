@@ -6,6 +6,7 @@ import 'package:coronavirus/Utils/coronaData/coronaService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/Drawer/drawer.dart';
+import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flag/flag.dart';
@@ -160,21 +161,32 @@ class _HomeScreenState extends State<HomeScreen> {
           : ListView(
               children: <Widget>[
                 MapCard(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PakistanMap()),
+                    );
+                  },
+                  child: ListTileCard(
+                    val: 1,
+                    cases: this.pakistan.cases,
+                    country: this.pakistan.country,
+                    logo: Container(
+                      child: Flags.getFullFlag('PK', 100, null),
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
+                ),
                 ListTileCard(
+                  val: 0,
                   cases: this.coronaData[7].cases,
                   country: this.coronaData[7].country,
                   logo: Icon(Icons.flag),
                 ),
                 ListTileCard(
-                  cases: this.pakistan.cases,
-                  country: this.pakistan.country,
-                  logo: Container(
-                    child: Flags.getFullFlag('PK', 100, null),
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-                ListTileCard(
+                  val: 0,
                   cases: this.coronaData[8].cases,
                   country: this.coronaData[8].country,
                   logo: Container(
@@ -184,6 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTileCard(
+                  val: 0,
                   cases: this.coronaData[9].cases,
                   country: this.coronaData[9].country,
                   logo: Container(
@@ -221,8 +234,9 @@ class _MapCardState extends State<MapCard> {
 class ListTileCard extends StatefulWidget {
   var country;
   var cases;
+  var val;
   var logo;
-  ListTileCard({Key key, this.country, this.cases, this.logo})
+  ListTileCard({Key key, this.country, this.cases, this.val, this.logo})
       : super(key: key);
 
   @override
@@ -233,6 +247,7 @@ class _ListTileCardState extends State<ListTileCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.val == 0 ? Colors.white : drawerGradient,
       elevation: 2,
       child: ListTile(
         leading: widget.logo,

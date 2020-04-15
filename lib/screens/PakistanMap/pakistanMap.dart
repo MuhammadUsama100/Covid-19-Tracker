@@ -1,4 +1,6 @@
+import 'package:coronavirus/Utils/htmlparser.dart';
 import "package:coronavirus/constants/constantcolor.dart";
+import 'package:coronavirus/screens/Donations/Donations.dart';
 import 'package:flutter/material.dart';
 
 class PakistanMap extends StatefulWidget {
@@ -10,7 +12,22 @@ class PakistanMap extends StatefulWidget {
 
 class _PakistanMapState extends State<PakistanMap> {
   int index = 0;
+  String deaths = " ";
+  String data = " ";
+  String name = " ";
   String imageURL = null;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchData().then((val) {
+      // setstate() {}
+    });
+  }
+
+  fetchData() async {
+    await fetchAlbum();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +45,14 @@ class _PakistanMapState extends State<PakistanMap> {
         ],
         currentIndex: index,
         selectedItemColor: theamColor,
-        onTap: (int index) {},
+        onTap: (int index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DonationsScreen()),
+            );
+          } else {}
+        },
       ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(170.0),
@@ -48,22 +72,22 @@ class _PakistanMapState extends State<PakistanMap> {
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold)),
-                    Text("active Cases",
+                    Text("active Cases : 4542",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Death",
+                    Text("Death : 107",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Recovered",
+                    Text("Recovered :  1,446",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Total Cases",
+                    Text("Total Cases : 5,988",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -85,7 +109,7 @@ class _PakistanMapState extends State<PakistanMap> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 30.0,
+                      top: 20.0,
                     ),
                     child: Container(
                         child: Column(
@@ -99,20 +123,33 @@ class _PakistanMapState extends State<PakistanMap> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            "click the region to ",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 8.0,
-                          ),
-                          child: Text("see more info:",
-                              style: TextStyle(color: Colors.grey)),
-                        ),
+                        this.name == " "
+                            ? Container()
+                            : Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  "${name}",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                        this.data == " "
+                            ? Container()
+                            : Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  "Cases : ${data}",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                        this.deaths == " "
+                            ? Container()
+                            : Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  "Death : ${deaths}",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
                       ],
                     )),
                   ),
@@ -137,39 +174,52 @@ class _PakistanMapState extends State<PakistanMap> {
                             print(obj.localPosition.dy);
                             if ((obj.localPosition.dx - 110).abs() < 19.0 &&
                                 (obj.localPosition.dy - 185).abs() < 19.0) {
-                              print("sindh");
+                              name = "Sindh";
+                              this.data = "1,518";
+                              this.deaths = "31";
 
                               this.imageURL = "assets/sindh.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 150).abs() <
                                     19.0 &&
                                 (obj.localPosition.dy - 124).abs() < 30.0) {
-                              print("panjab");
+                              this.data = "2,881";
+                              this.deaths = "24";
+                              name = ("Punjab");
                               this.imageURL = "assets/panjab.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 58).abs() <
                                     30.0 &&
                                 (obj.localPosition.dy - 161).abs() < 19.0) {
-                              print("balochistan");
+                              this.data = "231";
+                              this.deaths = "3";
+
+                              name = ("Balochistan");
                               this.imageURL = "assets/balochistan.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 152).abs() <
                                     19.0 &&
                                 (obj.localPosition.dy - 64).abs() < 19.0) {
-                              print("KPK");
+                              name = ("KPK");
+                              this.data = "800";
+                              this.deaths = "35";
                               this.imageURL = "assets/KPK.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 177).abs() <
-                                    9.0 &&
+                                    15.0 &&
                                 (obj.localPosition.dy - 63).abs() < 9.0) {
-                              print("Azad Kashmir ");
+                              name = ("AJK");
+                              this.data = "43";
+                              this.deaths = "0";
                               this.imageURL = "assets/kashmir.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 187).abs() <
                                     19.0 &&
                                 (obj.localPosition.dy - 36).abs() < 19.0) {
-                              print("Gilgit");
+                              name = ("Gilgit");
+                              this.deaths = "3";
                               this.imageURL = "assets/gilgit.png";
+                              this.data = "233";
                               setState(() {});
                             }
                           },
@@ -188,12 +238,12 @@ class _PakistanMapState extends State<PakistanMap> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(30.0),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  "More Information ->",
+                  "click the region to see more info: : ",
                   style: TextStyle(color: Colors.grey),
                 ),
-              )
+              ),
             ],
           ),
         ],
