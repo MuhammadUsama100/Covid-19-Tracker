@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/authService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/screens/HomeScreen/homeScreen.dart';
@@ -9,6 +10,8 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+  final Firestore _db = Firestore();
+
   bool _isSignedIn = false;
   @override
   void initState() {
@@ -26,7 +29,14 @@ class _StartScreenState extends State<StartScreen> {
     await Storage.initialize();
 
     authService.googleSignIn();
-    Storage.setlocal("Local", []);
+    DocumentReference ref =
+        _db.collection("user").document(Storage.getValue("UserID"));
+    var data = await ref.get();
+    List<String> list = [];
+    for (int i = 0; i < data["data"].length; i++) {
+      list.add(data["data"][i].toString());
+    }
+    Storage.setlocal("Local", list);
   }
 
   @override

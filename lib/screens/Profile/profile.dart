@@ -15,7 +15,7 @@ class _UserProfileState extends State<UserProfile> {
   final Firestore _db = Firestore();
   DocumentReference ref;
   String check;
-  var usman;
+
   var data;
   @override
   void initState() {
@@ -29,8 +29,7 @@ class _UserProfileState extends State<UserProfile> {
   fetchData() async {
     print("usama");
     ref = _db.collection("user").document(Storage.getValue("UserID"));
-    var refx = _db.collection("user").document("Uy9JSVGUjAYzQ0zm7WqI5OMi8LH3");
-    this.usman = await refx.get();
+
     this.data = await ref.get();
     check = data["status"];
   }
@@ -126,13 +125,11 @@ class _UserProfileState extends State<UserProfile> {
                                 CircularProgressIndicator(
                                   backgroundColor: theamColor,
                                   strokeWidth: 3,
-                                  value: this.usman["check"] == true ? 0.9 : 0,
+                                  value: 0.9,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
-                                  child: this.usman["check"] == true
-                                      ? Text("90%")
-                                      : Text("0%"),
+                                  child: Text("90%"),
                                 ),
                               ],
                             ),
@@ -158,16 +155,10 @@ class _UserProfileState extends State<UserProfile> {
                           await ref.updateData({"status": "Yes"}).then((val) {
                             setState(() {});
                           });
-                          await ref.updateData({"check": true}).then((val) {
-                            setState(() {});
-                          });
                         } else {
                           check = "No";
                           setState(() {});
                           await ref.updateData({"status": "No"}).then((val) {
-                            setState(() {});
-                          });
-                          await ref.updateData({"check": false}).then((val) {
                             setState(() {});
                           });
                         }

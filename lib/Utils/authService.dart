@@ -46,24 +46,36 @@ class AuthService {
   }
 
   void updateUserData(FirebaseUser user) async {
-    DocumentReference ref = _db.collection("user").document(user.uid);
-
     Storage.setValue("UserID", user.uid);
     Storage.setValue("UserName", user.displayName);
     Storage.setValue("UserEmail", user.email);
     Storage.setValue("Phone", user.phoneNumber);
     Storage.setValue("Image", user.photoUrl);
     Storage.setValue("time", DateTime.now().toString());
-    var data = await ref.get();
-
-    return ref.setData({
-      "uid": user.uid,
-      "email": user.email,
-      "name": user.displayName,
-      "friends": data["friends"],
-      "status": "No",
-      "logo": user.photoUrl
-    });
+    try {
+      DocumentReference ref = _db.collection("user").document(user.uid);
+      var data = await ref.get();
+      return ref.setData({
+        "uid": user.uid,
+        "email": user.email,
+        "data": data["data"],
+        "name": user.displayName,
+        "friends": data["friends"],
+        "status": "No",
+        "logo": user.photoUrl
+      });
+    } catch (e) {
+      DocumentReference ref = _db.collection("user").document(user.uid);
+      return ref.setData({
+        "uid": user.uid,
+        "email": user.email,
+        "data": [],
+        "name": user.displayName,
+        "friends": [],
+        "status": "No",
+        "logo": user.photoUrl
+      });
+    }
   }
 
   Future<void> signOut() async {
