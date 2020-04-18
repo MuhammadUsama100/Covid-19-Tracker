@@ -11,6 +11,7 @@ class InterctionList extends StatefulWidget {
 
 class _InterctionListState extends State<InterctionList> {
   var data;
+
   static final _appBar = AppBar(
     backgroundColor: theamColor,
     title: Text(
@@ -34,6 +35,7 @@ class _InterctionListState extends State<InterctionList> {
   initialize() async {
     DocumentReference ref =
         _db.collection("user").document(Storage.getValue("UserID"));
+
     this.data = await ref.get();
   }
 
@@ -54,10 +56,11 @@ class _InterctionListState extends State<InterctionList> {
                         return this.data["friends"].length == 0
                             ? Container()
                             : UserTile(
-                                name: data["friends"][index]["name"],
-                                email: data["friends"][index]["email"],
-                                status: data["friends"][index]["status"],
-                                logo: data["friends"][index]["logo"]);
+                                name: this.data["friends"][index]["email"],
+                                email: this.data["friends"][index]["id"],
+                                status: this.data["friends"][index]["status"],
+                                logo:
+                                    "https://lh4.googleusercontent.com/-k7gtckNuijQ/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOuDejZ0-md5xyPjtXsRa3j4RIkwQ/s96-c/photo.jpg");
                       })),
             ),
     );

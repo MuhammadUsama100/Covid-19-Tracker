@@ -1,10 +1,13 @@
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/screens/HeatMaps/heatmaps.dart';
 import 'package:coronavirus/screens/InterectionList/interactionList.dart';
 import 'package:coronavirus/screens/NewsFeeds/newsFeeds.dart';
+import 'package:coronavirus/screens/Notifications/notifications.dart';
 import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
 import 'package:coronavirus/screens/Precautions/precautions.dart';
 import 'package:coronavirus/screens/Profile/profile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:drawer_component/drawer_component.dart';
 import 'package:coronavirus/screens/Donations/Donations.dart';
@@ -56,7 +59,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         DrawerTile(
           name: "Notifications",
           textOverflow: TextOverflow.ellipsis,
-          child: UserProfile(),
+          child: Notifications(),
           leading: Icon(Icons.notifications),
           tileSize: 10,
           dividerheight: 5,
@@ -66,7 +69,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         DrawerTile(
           name: "Heat Maps",
           textOverflow: TextOverflow.ellipsis,
-          child: Precautions(),
+          child: HeatMaps(),
           leading: Icon(Icons.map),
           tileSize: 10,
           dividerheight: 5,

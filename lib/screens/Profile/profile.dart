@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class UserProfile extends StatefulWidget {
   UserProfile({Key key}) : super(key: key);
@@ -14,7 +15,7 @@ class _UserProfileState extends State<UserProfile> {
   final Firestore _db = Firestore();
   DocumentReference ref;
   String check;
-
+  var usman;
   var data;
   @override
   void initState() {
@@ -28,6 +29,8 @@ class _UserProfileState extends State<UserProfile> {
   fetchData() async {
     print("usama");
     ref = _db.collection("user").document(Storage.getValue("UserID"));
+    var refx = _db.collection("user").document("Uy9JSVGUjAYzQ0zm7WqI5OMi8LH3");
+    this.usman = await refx.get();
     this.data = await ref.get();
     check = data["status"];
   }
@@ -74,9 +77,9 @@ class _UserProfileState extends State<UserProfile> {
                                 style: TextStyle(color: Colors.white)),
                             Row(
                               children: <Widget>[
-                                Text("Status : ",
+                                Text("Coronavirus Infection : ",
                                     style: TextStyle(color: Colors.white)),
-                                Text("${check} Corona  ",
+                                Text("${check}",
                                     style: TextStyle(color: Colors.white)),
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
@@ -93,14 +96,6 @@ class _UserProfileState extends State<UserProfile> {
                                 )
                               ],
                             ),
-                            Row(
-                              children: <Widget>[
-                                Text("Threat Level : ",
-                                    style: TextStyle(color: Colors.white)),
-                                Text("ZERO",
-                                    style: TextStyle(color: Colors.white)),
-                              ],
-                            ),
                           ],
                         )),
                       ),
@@ -114,8 +109,45 @@ class _UserProfileState extends State<UserProfile> {
           : ListView(
               children: <Widget>[
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
+                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                  child: Card(
+                    elevation: 2,
+                    child: Container(
+                      height: 85,
+                      child: Center(
+                        child: ListTile(
+                          trailing: Container(
+                            width: 100,
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                CircularProgressIndicator(
+                                  backgroundColor: theamColor,
+                                  strokeWidth: 3,
+                                  value: this.usman["check"] == true ? 0.9 : 0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: this.usman["check"] == true
+                                      ? Text("90%")
+                                      : Text("0%"),
+                                ),
+                              ],
+                            ),
+                          ),
+                          leading: Icon(Icons.score),
+                          title: Text("Risk Factor ",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                   child: Builder(
                     builder: (context) => InkWell(
                       onTap: () async {
@@ -126,10 +158,16 @@ class _UserProfileState extends State<UserProfile> {
                           await ref.updateData({"status": "Yes"}).then((val) {
                             setState(() {});
                           });
+                          await ref.updateData({"check": true}).then((val) {
+                            setState(() {});
+                          });
                         } else {
                           check = "No";
                           setState(() {});
                           await ref.updateData({"status": "No"}).then((val) {
+                            setState(() {});
+                          });
+                          await ref.updateData({"check": false}).then((val) {
                             setState(() {});
                           });
                         }
@@ -167,13 +205,26 @@ class _UserProfileState extends State<UserProfile> {
                       child: Center(
                         child: ListTile(
                           leading: Icon(Icons.score),
-                          title: Text("Test Covid-19 ",
+                          title: Text("Upload Report",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
-                          subtitle: Text(
-                              "Test based on symptoms and historical data analysis",
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                  child: Card(
+                    elevation: 2,
+                    child: Container(
+                      height: 85,
+                      child: Center(
+                        child: ListTile(
+                          leading: Icon(Icons.score),
+                          title: Text("Government  Certificate",
                               style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold)),
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ),
@@ -193,6 +244,27 @@ class _UserProfileState extends State<UserProfile> {
                                   fontSize: 20, fontWeight: FontWeight.bold)),
                           subtitle: Text(
                               "What should you do with each threat level and under CoronaVirus ",
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                  child: Card(
+                    elevation: 2,
+                    child: Container(
+                      height: 85,
+                      child: Center(
+                        child: ListTile(
+                          leading: Icon(Icons.score),
+                          title: Text("Test COVID-19 ",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          subtitle: Text(
+                              "Test based on symptoms and historical data analysis",
                               style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold)),
                         ),

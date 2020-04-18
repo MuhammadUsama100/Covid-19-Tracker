@@ -4,11 +4,13 @@ import 'package:coronavirus/Models/friend.dart';
 import 'package:coronavirus/Models/tracker.dart';
 import 'package:coronavirus/Utils/coronaData/coronaService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
+import 'package:coronavirus/Utils/tracker.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/Drawer/drawer.dart';
 import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:flag/flag.dart';
 
 import 'package:coronavirus/Models/coronaData.dart';
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer timer;
   Timer timeGps;
   Timer submit;
+  Timer process;
   List friend = [];
   final Firestore _db = Firestore();
   List<CoronaData> coronaData;
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     if (this.coronaData == null) {
-      print("object");
+      //print("object");
       initialize().then((val) {
         setState(() {
           // print(this.coronaData[0]);
@@ -51,74 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
     gpsLocal();
     //18000
 
-    submit = Timer.periodic(Duration(seconds: 18000), (Timer t) async {
-      DocumentReference ref =
-          _db.collection("user").document(Storage.getValue("UserID"));
-
-      ref.updateData({"data": Storage.getlocal("Local")});
-      QuerySnapshot querySnapshot =
-          await Firestore.instance.collection("user").getDocuments();
-      querySnapshot.documents.forEach((doc) {
-        List list = doc["data"];
-        List localList = Storage.getlocal("Local");
-        list.forEach((val) {
-          Track tack = Storage.parse(val.toString());
-          localList.forEach((locVal) async {
-            print("object");
-            Track localtack = Storage.parse(locVal.toString());
-            print(localtack.time);
-            if ((DateTime.parse(localtack.time).millisecondsSinceEpoch -
-                        DateTime.parse(tack.time).millisecondsSinceEpoch)
-                    .abs() <
-                1000) {
-              print("usama1");
-              var latlocal = double.parse(localtack.lat);
-              assert(latlocal is double);
-              var longlocal = double.parse(localtack.lat);
-              assert(longlocal is double);
-              var lat = double.parse(localtack.lat);
-              assert(lat is double);
-              var long = double.parse(localtack.lat);
-              assert(long is double);
-              print(long);
-
-              if ((latlocal - lat).abs() < 3 &&
-                  (longlocal - long).abs() < 3 &&
-                  doc["email"] != Storage.getValue("UserEmail")) {
-                print("usama1");
-                print("usama1");
-
-                // add to list  ;
-
-                var friends = await ref.get();
-                List list = friends.data["friends"];
-                bool alreadyFriend = false;
-                print(doc["email"]);
-                list.forEach((f) {
-                  if (doc["email"].toString() == f.email.toString()) {
-                    alreadyFriend = true;
-                  }
-                });
-                if (!alreadyFriend) {
-                  list.add({
-                    "logo": doc["logo"],
-                    "name": doc["name"],
-                    "email": doc["email"],
-                    "status": doc["status"]
-                  });
-                  list.forEach((f) {
-                    this.friend.add(f);
-                  });
-                }
-              }
-              //time compared
-              print("part1");
-            }
-          });
-        });
-      });
-      ref.updateData({"friends": this.friend});
-      // Storage.setlocal("Local", []);
+    submit = Timer.periodic(Duration(seconds: 20), (Timer t) async {
+      updateCoordinates(_db);
+      await positionCheck(_db);
     });
   }
 
@@ -131,7 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
           " " +
           position.longitude.toString() +
           " " +
-          DateTime.now().toString());
+          DateTime.now().toString() +
+          " " +
+          position.altitude.toString());
       // print(str);
       Storage.setlocal("Local", str);
       // str.forEach((f) => print(f));

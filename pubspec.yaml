@@ -37,6 +37,8 @@ dependencies:
   flag: ^1.0.3
   getflutter: ^1.0.11
   html: ^0.14.0+3
+  percent_indicator: "^2.1.1"
+  google_maps_flutter: ^0.5.25+3
 
 dev_dependencies:
   flutter_test:

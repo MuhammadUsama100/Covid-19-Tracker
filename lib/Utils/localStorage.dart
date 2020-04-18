@@ -36,6 +36,7 @@ class Storage {
     track.long = list[0];
     track.lat = list[1];
     track.time = list[2] + " " + list[3];
+    track.altitute = list[4];
     return track;
   }
 
