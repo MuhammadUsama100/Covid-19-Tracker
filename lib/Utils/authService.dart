@@ -61,7 +61,8 @@ class AuthService {
         "data": data["data"],
         "name": user.displayName,
         "friends": data["friends"],
-        "status": "No",
+        "status": data["status"],
+        "thread": data["thread"],
         "logo": user.photoUrl
       });
     } catch (e) {
@@ -73,6 +74,7 @@ class AuthService {
         "name": user.displayName,
         "friends": [],
         "status": "No",
+        "thread": {"percent": 0, "threadDate": DateTime.now().day},
         "logo": user.photoUrl
       });
     }

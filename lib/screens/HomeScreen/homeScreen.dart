@@ -56,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     submit = Timer.periodic(Duration(seconds: 20), (Timer t) async {
       updateCoordinates(_db);
-      await positionCheck(_db);
+      await positionCheck(_db).then((onValue) async {
+        await threadLevelClassifier(_db);
+      });
     });
   }
 

@@ -30,7 +30,7 @@ class Storage {
   }
 
   static parse(String local) {
-    print(local);
+    //print(local);
     List<String> list = local.split(" ");
     Track track = new Track();
     track.long = list[0];

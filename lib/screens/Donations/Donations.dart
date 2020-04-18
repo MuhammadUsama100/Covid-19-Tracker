@@ -94,7 +94,7 @@ class _DonationsScreenState extends State<DonationsScreen> {
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: theamColor)),
-                      Text("Your Total Donations",
+                      Text(totalDonations,
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

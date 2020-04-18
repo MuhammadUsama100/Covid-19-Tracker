@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronavirus/Models/threadmodel.dart';
 import 'package:coronavirus/Models/tracker.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 
@@ -12,43 +15,66 @@ Future<void> positionCheck(Firestore _db) async {
   DocumentReference ref =
       _db.collection("user").document(Storage.getValue("UserID"));
   DocumentSnapshot user = await ref.get();
-  var userList = user["data"];
+  var userList = await user["data"];
   QuerySnapshot querySnapshot =
       await Firestore.instance.collection("user").getDocuments();
-  querySnapshot.documents.forEach((doc) {
-    var list = doc["data"];
-    for (int i = 0; i < list.length; i++) {
-      Track alluser = Storage.parse(list[i]);
-      for (int j = 0; j < userList.length; j++) {
-        Track currentuser = Storage.parse(userList[j]);
+  querySnapshot.documents.forEach((doc) async {
+    if (doc != null) {
+      var list = await doc["data"];
+      for (int i = 0; i < list.length; i++) {
+        Track alluser = Storage.parse(list[i]);
+        for (int j = 0; j < userList.length; j++) {
+          Track currentuser = Storage.parse(userList[j]);
 
-        if (compare(currentuser, alluser) && doc["email"] != user["email"]) {
-          var friends = user["friends"];
-          bool alreadyFriend = false;
-          bool statusUpdate = false;
-          for (int k = 0; k < friends.length; k++) {
-            if (friends[k]["email"] == doc["email"]) {
-              alreadyFriend = true;
-              if (friends[k]["status"] != doc["status"]) statusUpdate = true;
-            }
-          }
-          if (!alreadyFriend) {
-            friends.add({
-              "email": doc["email"],
-              "status": doc["status"],
-              "id": doc.documentID
-            });
-            ref.updateData({"friends": friends});
-          }
-          if (statusUpdate) {
+          if (compare(currentuser, alluser) && doc["email"] != user["email"]) {
+            var friends = user["friends"];
+            bool alreadyFriend = false;
+            bool statusUpdate = false;
+            bool updateDate = false;
             for (int k = 0; k < friends.length; k++) {
+              DateTime usertime = DateTime.parse(currentuser.time);
+              assert(usertime is DateTime);
               if (friends[k]["email"] == doc["email"]) {
-                if (friends[k]["status"] != doc["status"]) {
-                  friends[k]["status"] = doc["status"];
+                alreadyFriend = true;
+                if (friends[k]["status"] != doc["status"])
+                  statusUpdate = true;
+                else if (friends[k]["date"] < usertime.day) {
+                  for (int k = 0; k < friends.length; k++) {
+                    if (friends[k]["email"] == doc["email"]) {
+                      if (friends[k]["date"] < doc["date"]) {
+                        friends[k]["date"] = usertime.day;
+                      }
+                    }
+                  }
+                  ref.updateData({"friends": friends});
                 }
               }
             }
-            ref.updateData({"friends": friends});
+            if (!alreadyFriend) {
+              friends.add({
+                "check": 0,
+                "email": doc["email"],
+                "status": doc["status"],
+                "id": doc.documentID,
+                "date": DateTime.now().day,
+                "thread": {
+                  "percent": 0,
+                  "threadDate": DateTime.now().day,
+                },
+              });
+              ref.updateData({"friends": friends});
+            }
+            if (statusUpdate) {
+              for (int k = 0; k < friends.length; k++) {
+                if (friends[k]["email"] == doc["email"]) {
+                  if (friends[k]["status"] != doc["status"]) {
+                    friends[k]["status"] = doc["status"];
+                    friends[k]["check"] = 0;
+                  }
+                }
+              }
+              ref.updateData({"friends": friends});
+            }
           }
           // all comapre done  ;
         }
@@ -94,86 +120,38 @@ bool compare(Track user, Track alluser) {
     return false;
   }
 }
+// 14 classification
 
-// submit = Timer.periodic(Duration(seconds: 30), (Timer t) async {
-//   DocumentReference ref =
-//       _db.collection("user").document(Storage.getValue("UserID"));
+Future<void> threadLevelClassifier(Firestore _db) async {
+  int count = 1;
+  print("anas");
+  DocumentReference ref =
+      _db.collection("user").document(Storage.getValue("UserID"));
+  print("anas1");
+  DocumentSnapshot user = await ref.get();
+  var percent = user["thread"]["percent"];
+  var list = await user["friends"];
+  for (int i = 0; i < list.length; i++) {
+    DocumentReference refx = _db.collection("user").document(list[i]["id"]);
+    DocumentSnapshot data = await refx.get();
+    var val = list[i]["thread"]["percent"].toDouble();
+    assert(val is double);
+    var check = list[i]["check"].toInt();
+    assert(check is int);
+    //assert(check is bool);
 
-//   ref.updateData({"data": Storage.getlocal("Local")});
-//   QuerySnapshot querySnapshot =
-//       await Firestore.instance.collection("user").getDocuments();
-//   querySnapshot.documents.forEach((doc) {
-//     List list = doc["data"];
-//     List localList = Storage.getlocal("Local");
-//     list.forEach((val) {
-//       Track tack = Storage.parse(val.toString());
-//       localList.forEach((locVal) async {
-//         // print("object");
-//         Track localtack = Storage.parse(locVal.toString());
-//         // print(localtack.time);
-//         if ((DateTime.parse(localtack.time).millisecondsSinceEpoch -
-//                     DateTime.parse(tack.time).millisecondsSinceEpoch)
-//                 .abs() <
-//             1000) {
-//           // print("usama1");
-//           var latlocal = double.parse(localtack.lat);
-//           assert(latlocal is double);
-//           var longlocal = double.parse(localtack.lat);
-//           assert(longlocal is double);
-//           var lat = double.parse(localtack.lat);
-//           assert(lat is double);
-//           var long = double.parse(localtack.lat);
-//           assert(long is double);
-//           // print(long);
-
-//           if ((latlocal - lat).abs() < 3 &&
-//               (longlocal - long).abs() < 3 &&
-//               doc["email"] != Storage.getValue("UserEmail")) {
-//             // print("usama1");
-//             // print("usama1");
-
-//             // add to list  ;
-
-//             var friends = await ref.get();
-//             List list = friends.data["friends"];
-//             bool alreadyFriend = false;
-//             // print(doc["email"]);
-//             alreadyFriend = false;
-
-//             list.forEach((f) {
-//               if (doc["email"].toString() == f.email.toString()) {
-//                 alreadyFriend = true;
-//               }
-//             });
-
-//             // print(alreadyFriend);
-//             if (!alreadyFriend) {
-//               list.add({
-//                 "logo": doc["logo"],
-//                 "name": doc["name"],
-//                 "email": doc["email"],
-//                 "status": doc["status"]
-//               });
-//               list.forEach((f) {
-//                 this.friend.add(f);
-//               });
-//             } else {
-//               //print("usama");
-//               this.friend.forEach((f) {
-//                 if (doc["email"].toString() == f.email.toString()) {
-//                   this.friend.remove(f);
-//                 }
-//               });
-//               list.forEach((f) {
-//                 if (doc["email"].toString() == f.email.toString()) {
-//                   f.status = doc["status"];
-//                 }
-//               });
-//             }
-//           }
-//           //time compared
-//           print("part1");
-//         }
-//       });
-//     });
-//   });
+    // if (list[i]["date"] > data["thread"]["date"] &&
+    if (val != 0 && check == 0) {
+      count++;
+      list[i]["check"] = 1;
+      percent = percent + val;
+    }
+    print("anas2");
+  }
+  percent = (percent / (count * 100)) * 100;
+  print(percent);
+  ref.updateData({
+    "thread": {"percent": percent, "threadDate": DateTime.now().day}
+  });
+  ref.updateData({"friends": list});
+}
