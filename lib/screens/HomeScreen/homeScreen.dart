@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Models/friend.dart';
 import 'package:coronavirus/Models/tracker.dart';
+import 'package:coronavirus/Utils/chacknetwork.dart';
 import 'package:coronavirus/Utils/coronaData/coronaService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/Utils/tracker.dart';
@@ -54,11 +55,15 @@ class _HomeScreenState extends State<HomeScreen> {
     gpsLocal();
     //18000
 
-    submit = Timer.periodic(Duration(seconds: 20), (Timer t) async {
-      updateCoordinates(_db);
-      await positionCheck(_db).then((onValue) async {
-        await threadLevelClassifier(_db);
-      });
+    submit = Timer.periodic(Duration(seconds: 35), (Timer t) async {
+      if (await checkNet()) {
+        updateCoordinates(_db);
+        await positionCheck(_db).then((onValue) async {
+          await threadLevelClassifier(_db);
+        });
+      } else {
+        print("no NetWork");
+      }
     });
   }
 

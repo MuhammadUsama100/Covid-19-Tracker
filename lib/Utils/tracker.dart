@@ -109,12 +109,12 @@ bool compare(Track user, Track alluser) {
   DateTime allusertime = DateTime.parse(alluser.time);
   //assert(allusertime is DateTime);
 
-  if ((userlat - alluserlat).abs() < 10 &&
-      (userlong - alluserlong).abs() < 10 &&
-      (useralti - alluseralti).abs() < 4 &&
+  if ((userlat - alluserlat).abs() < 15 &&
+      (userlong - alluserlong).abs() < 15 &&
+      (useralti - alluseralti).abs() < 20 &&
       (usertime.millisecondsSinceEpoch - allusertime.millisecondsSinceEpoch)
               .abs() <
-          100) {
+          8000) {
     return true;
   } else {
     return false;

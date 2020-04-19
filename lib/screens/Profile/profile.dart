@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/screens/QrCodeScanner/qrScanner.dart';
+import 'package:coronavirus/screens/Qrcodes/qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -109,38 +111,51 @@ class _UserProfileState extends State<UserProfile> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Container(
-                      height: 85,
-                      child: Center(
-                        child: ListTile(
-                          trailing: Container(
-                            width: 100,
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                CircularProgressIndicator(
-                                  backgroundColor: theamColor,
-                                  strokeWidth: 3,
-                                  value: 0.9,
+                  child: Builder(
+                    builder: (context) => InkWell(
+                        onTap: () {
+                          showAlertDialog(
+                              context,
+                              (data["thread"]["percent"] / 100).toString(),
+                              "Thread Level");
+                        },
+                        child: Card(
+                          elevation: 2,
+                          child: Container(
+                            height: 85,
+                            child: Center(
+                              child: ListTile(
+                                trailing: Container(
+                                  width: 100,
+                                  height: 100,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      CircularProgressIndicator(
+                                        backgroundColor: theamColor,
+                                        strokeWidth: 3,
+                                        value: data["thread"]["percent"] / 100,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(data["thread"]["percent"]
+                                            .toString()),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text("90%"),
-                                ),
-                              ],
+                                leading: Icon(Icons.score),
+                                title: Text("Risk Factor ",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              ),
                             ),
                           ),
-                          leading: Icon(Icons.score),
-                          title: Text("Risk Factor ",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                    ),
+                        )),
                   ),
                 ),
                 Padding(
@@ -153,6 +168,14 @@ class _UserProfileState extends State<UserProfile> {
                           setState(() {});
 
                           await ref.updateData({"status": "Yes"}).then((val) {
+                            setState(() {});
+                          });
+                          await ref.updateData({
+                            "thread": {
+                              "percent": 100,
+                              "threadDate": DateTime.now().day
+                            }
+                          }).then((val) {
                             setState(() {});
                           });
                         } else {
@@ -189,77 +212,69 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Container(
-                      height: 85,
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(Icons.score),
-                          title: Text("Upload Report",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
+                  child: Builder(
+                    builder: (context) => InkWell(
+                      onTap: () async {
+                        var status = await scan();
+                        if (status == "Yes" || status == "No")
+                          await ref.updateData({"status": status}).then((val) {
+                            setState(() {});
+                          });
+                        else {
+                          final snackBar =
+                              SnackBar(content: Text('Irrelevant Scan'));
+
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      child: Card(
+                          elevation: 2,
+                          child: Container(
+                            height: 85,
+                            child: Center(
+                              child: ListTile(
+                                leading: Icon(Icons.score),
+                                subtitle: Text("Scan QrCode on COVID-19 Report",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold)),
+                                title: Text("Scan Report",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                          )),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Container(
-                      height: 85,
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(Icons.score),
-                          title: Text("Government  Certificate",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Container(
-                      height: 85,
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(Icons.score),
-                          title: Text("Instructions",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          subtitle: Text(
-                              "What should you do with each threat level and under CoronaVirus ",
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Container(
-                      height: 85,
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(Icons.score),
-                          title: Text("Test COVID-19 ",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          subtitle: Text(
-                              "Test based on symptoms and historical data analysis",
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
+                  child: Builder(
+                    builder: (context) => InkWell(
+                      onTap: () {
+                        showAlertDialog(context, Storage.getValue("UserID"),
+                            "Scan Code to change status code");
+                      },
+                      child: Card(
+                          elevation: 2,
+                          child: Container(
+                            height: 85,
+                            child: Center(
+                              child: ListTile(
+                                leading: Icon(Icons.score),
+                                title: Text("QR Code Status Change",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                                subtitle: Text(
+                                    "Generate QR code to update status",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                          )),
                     ),
                   ),
                 ),
