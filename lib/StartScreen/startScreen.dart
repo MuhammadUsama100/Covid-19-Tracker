@@ -58,6 +58,8 @@ class _StartScreenState extends State<StartScreen> {
     if (_isSignedIn) {
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(builder: (context) => HomeScreen()));
+    } else {
+      setState(() {});
     }
   }
 }

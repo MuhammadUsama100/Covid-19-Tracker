@@ -61,11 +61,10 @@ class _InterctionListState extends State<InterctionList> {
                                         style: TextStyle(color: Colors.grey))),
                               )
                             : UserTile(
-                                name: this.data["friends"][index]["email"],
+                                name: this.data["friends"][index]["name"],
                                 email: this.data["friends"][index]["id"],
                                 status: this.data["friends"][index]["status"],
-                                logo:
-                                    "https://lh4.googleusercontent.com/-k7gtckNuijQ/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOuDejZ0-md5xyPjtXsRa3j4RIkwQ/s96-c/photo.jpg");
+                                logo: this.data["friends"][index]["logo"]);
                       })),
             ),
     );

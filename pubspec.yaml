@@ -43,7 +43,10 @@ dependencies:
   barcode_scan: 2.0.2
   flare_splash_screen: ^3.0.0
   flare_loading: ^2.1.0
+  webview_flutter: ^0.3.20
+
 dev_dependencies:
+  intl_translation: ^0.17.9
   flutter_test:
     sdk: flutter
 

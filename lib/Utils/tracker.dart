@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Models/threadmodel.dart';
 import 'package:coronavirus/Models/tracker.dart';
@@ -109,9 +107,9 @@ bool compare(Track user, Track alluser) {
   DateTime allusertime = DateTime.parse(alluser.time);
   //assert(allusertime is DateTime);
 
-  if ((userlat - alluserlat).abs() < 15 &&
-      (userlong - alluserlong).abs() < 15 &&
-      (useralti - alluseralti).abs() < 20 &&
+  if ((userlat - alluserlat).abs() < 1 &&
+      (userlong - alluserlong).abs() < 1 &&
+      (useralti - alluseralti).abs() < 10 &&
       (usertime.millisecondsSinceEpoch - allusertime.millisecondsSinceEpoch)
               .abs() <
           8000) {
