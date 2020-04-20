@@ -9,6 +9,7 @@ import 'package:coronavirus/Utils/tracker.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
 import 'package:coronavirus/screens/Drawer/drawer.dart';
 import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
@@ -97,6 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       drawer: Drawer(child: DrawerScreen()),
       appBar: AppBar(

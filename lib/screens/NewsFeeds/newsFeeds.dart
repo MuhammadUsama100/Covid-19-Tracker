@@ -158,11 +158,14 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            height: 300,
-            child: Image.network(
-              widget.image,
-              fit: BoxFit.fill,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 300,
+              child: Image.network(
+                widget.image,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Padding(

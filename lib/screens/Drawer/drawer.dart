@@ -5,6 +5,7 @@ import 'package:coronavirus/screens/InterectionList/interactionList.dart';
 import 'package:coronavirus/screens/NewsFeeds/newsFeeds.dart';
 import 'package:coronavirus/screens/Notifications/notifications.dart';
 import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
+import 'package:coronavirus/screens/Policy/privatePolicy.dart';
 import 'package:coronavirus/screens/Precautions/precautions.dart';
 import 'package:coronavirus/screens/Profile/profile.dart';
 
@@ -91,6 +92,16 @@ class _DrawerScreenState extends State<DrawerScreen> {
           textOverflow: TextOverflow.ellipsis,
           child: Precautions(),
           leading: Icon(Icons.error_outline),
+          tileSize: 10,
+          dividerheight: 5,
+          dividerThickness: 0.3,
+          dividercolor: Colors.black,
+        ),
+        DrawerTile(
+          name: "PrivacyPolicy",
+          textOverflow: TextOverflow.ellipsis,
+          child: PrivacyPolicy(),
+          leading: Icon(Icons.stop_screen_share),
           tileSize: 10,
           dividerheight: 5,
           dividerThickness: 0.3,

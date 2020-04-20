@@ -1,6 +1,7 @@
 import 'package:coronavirus/Utils/htmlparser.dart';
 import "package:coronavirus/constants/constantcolor.dart";
 import 'package:coronavirus/screens/Donations/Donations.dart';
+import 'package:coronavirus/screens/Help/helpscreen.dart';
 import 'package:flutter/material.dart';
 
 class PakistanMap extends StatefulWidget {
@@ -51,7 +52,9 @@ class _PakistanMapState extends State<PakistanMap> {
               context,
               MaterialPageRoute(builder: (context) => DonationsScreen()),
             );
-          } else {}
+          } else {
+            showAlertHelp(context, "How Maps Work");
+          }
         },
       ),
       appBar: PreferredSize(
@@ -240,7 +243,7 @@ class _PakistanMapState extends State<PakistanMap> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  "click the region to see more info: : ",
+                  "click the region to see more info: ",
                   style: TextStyle(color: Colors.grey),
                 ),
               ),

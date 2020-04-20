@@ -54,7 +54,12 @@ class _InterctionListState extends State<InterctionList> {
                           : this.data["friends"].length,
                       itemBuilder: (context, index) {
                         return this.data["friends"].length == 0
-                            ? Container()
+                            ? Container(
+                                child: Center(
+                                    child: Text(
+                                        "You are sSecure had not interacted with any one",
+                                        style: TextStyle(color: Colors.grey))),
+                              )
                             : UserTile(
                                 name: this.data["friends"][index]["email"],
                                 email: this.data["friends"][index]["id"],
