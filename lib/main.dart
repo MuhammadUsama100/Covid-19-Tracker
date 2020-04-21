@@ -3,6 +3,9 @@ import 'package:coronavirus/StartScreen/startScreen.dart';
 import 'package:flutter/material.dart';
 import 'Utils/coronaData/coronaService.dart';
 
+import 'package:coronavirus/locals/locals.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -12,6 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [Locale("ur", ""), Locale("en", "")],
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -46,7 +47,7 @@ class _NewesFeedsState extends State<NewesFeeds> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("News Feeds"),
+          title: Text(AppLocations.of(context).newsFeed),
           backgroundColor: theamColor,
         ),
         body: this.data == null

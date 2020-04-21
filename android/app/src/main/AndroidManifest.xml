@@ -9,8 +9,9 @@
          FlutterApplication and put your custom class here. -->
     
     <application
+        android:usesCleartextTraffic="true"
         android:name="io.flutter.app.FlutterApplication"
-        android:label="coronavirus"
+        android:label="COVID-19 Tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

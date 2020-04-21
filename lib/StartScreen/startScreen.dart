@@ -18,16 +18,14 @@ class _StartScreenState extends State<StartScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initializeApp().then((val) {
-      _isSignedIn = true;
-      setState(() {});
-    });
   }
 
-  initializeApp() async {
+  Future<bool> initializeApp() async {
+    print("USAMA");
+
     await Storage.initialize();
 
-    authService.googleSignIn();
+    await authService.googleSignIn();
     DocumentReference ref =
         _db.collection("user").document(Storage.getValue("UserID"));
     var data = await ref.get();
@@ -36,6 +34,8 @@ class _StartScreenState extends State<StartScreen> {
       list.add(data["data"][i].toString());
     }
     Storage.setlocal("Local", list);
+    print("USAMA");
+    return true;
   }
 
   @override
@@ -43,11 +43,15 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
         body: SplashScreen.callback(
       name: 'assets/NewFile.flr',
-      onSuccess: (dynamic data) {
-        _changeScreen();
+      onSuccess: (dynamic data) async {
+        print("object");
+        if (await initializeApp()) {
+          _isSignedIn = true;
+          _changeScreen();
+        }
       },
       onError: (dynamic error, dynamic stacktrace) {
-        _changeScreen();
+        // _changeScreen();
       },
       until: () => Future.delayed(Duration(seconds: 5)),
       startAnimation: 'Untitled',

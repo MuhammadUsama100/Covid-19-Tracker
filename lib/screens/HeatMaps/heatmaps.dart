@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,7 +21,9 @@ class HeatMapsState extends State<HeatMaps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: theamColor, title: Text("Heat Maps")),
+      appBar: AppBar(
+          backgroundColor: theamColor,
+          title: Text(AppLocations.of(context).heatmaps)),
       body: WebView(
         initialUrl: "http://13.229.231.75:9000/",
         javascriptMode: JavascriptMode.unrestricted,

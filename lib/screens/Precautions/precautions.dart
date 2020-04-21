@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:flutter/material.dart';
 
 class Precautions extends StatefulWidget {
@@ -38,7 +39,7 @@ class _PrecautionsState extends State<Precautions> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: theamColor,
-          title: Text('Precautions'),
+          title: Text(AppLocations.of(context).precautions),
         ),
         body: this.data == null
             ? Center(child: CircularProgressIndicator())

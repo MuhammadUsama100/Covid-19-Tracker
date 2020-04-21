@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:coronavirus/screens/InterectionList/interrectionTile.dart';
 import 'package:flutter/material.dart';
 
@@ -11,16 +12,6 @@ class InterctionList extends StatefulWidget {
 
 class _InterctionListState extends State<InterctionList> {
   var data;
-
-  static final _appBar = AppBar(
-    backgroundColor: theamColor,
-    title: Text(
-      'Interaction List',
-      style: TextStyle(
-        color: Colors.white,
-      ),
-    ),
-  );
 
   final Firestore _db = Firestore();
 
@@ -42,7 +33,15 @@ class _InterctionListState extends State<InterctionList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar,
+      appBar: AppBar(
+        backgroundColor: theamColor,
+        title: Text(
+          AppLocations.of(context).interaction,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: this.data == null
           ? Center(child: CircularProgressIndicator())
           : Padding(
@@ -56,15 +55,17 @@ class _InterctionListState extends State<InterctionList> {
                         return this.data["friends"].length == 0
                             ? Container(
                                 child: Center(
-                                    child: Text(
-                                        "You are sSecure had not interacted with any one",
-                                        style: TextStyle(color: Colors.grey))),
+                                    child: Center(
+                                  child: Text(
+                                      "You are Secure had not interacted with any one",
+                                      style: TextStyle(color: Colors.grey)),
+                                )),
                               )
                             : UserTile(
-                                name: this.data["friends"][index]["name"],
+                                name: this.data["friends"][index]["email"],
                                 email: this.data["friends"][index]["id"],
                                 status: this.data["friends"][index]["status"],
-                                logo: this.data["friends"][index]["logo"]);
+                                logo: "k");
                       })),
             ),
     );

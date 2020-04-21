@@ -1,5 +1,7 @@
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
+import 'package:coronavirus/screens/Developers/developers.dart';
 import 'package:coronavirus/screens/HeatMaps/heatmaps.dart';
 import 'package:coronavirus/screens/InterectionList/interactionList.dart';
 import 'package:coronavirus/screens/NewsFeeds/newsFeeds.dart';
@@ -48,7 +50,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "Interection List",
+          name: AppLocations.of(context).interaction,
           textOverflow: TextOverflow.ellipsis,
           child: InterctionList(),
           leading: Icon(Icons.people),
@@ -58,7 +60,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "Notifications",
+          name: AppLocations.of(context).notifications,
           textOverflow: TextOverflow.ellipsis,
           child: Notifications(),
           leading: Icon(Icons.notifications),
@@ -68,7 +70,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "Heat Maps",
+          name: AppLocations.of(context).heatmaps,
           textOverflow: TextOverflow.ellipsis,
           child: HeatMaps(),
           leading: Icon(Icons.map),
@@ -78,7 +80,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "News Feed",
+          name: AppLocations.of(context).newsFeed,
           textOverflow: TextOverflow.ellipsis,
           child: NewesFeeds(),
           leading: Icon(Icons.pages),
@@ -88,7 +90,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "Precautions",
+          name: AppLocations.of(context).precautions,
           textOverflow: TextOverflow.ellipsis,
           child: Precautions(),
           leading: Icon(Icons.error_outline),
@@ -98,7 +100,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           dividercolor: Colors.black,
         ),
         DrawerTile(
-          name: "PrivacyPolicy",
+          name: AppLocations.of(context).privacypolicy,
           textOverflow: TextOverflow.ellipsis,
           child: PrivacyPolicy(),
           leading: Icon(Icons.stop_screen_share),

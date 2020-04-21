@@ -1,4 +1,5 @@
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicy extends StatefulWidget {
@@ -18,14 +19,14 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              "Privacy policy",
+              AppLocations.of(context).privacypolicy,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              "Privacy policy",
+              AppLocations.of(context).privacypolicy,
               style: TextStyle(
                 fontSize: 14,
               ),

@@ -1,0 +1,123 @@
+{
+  
+  "homeScreen": "COVID-19",
+  "@homeScreen": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pakistanCases": "پاکستان کیسز",
+  "@pakistanCases": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profilestatus": "کورونا وائرس انفیکشن",
+  "@profilestatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "riskFector": "خطرہ",
+  "@riskFector": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeStatus": "جائزہ",
+  "@changeStatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "scanReport": "معائنہ",
+  "@scanReport": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "qrcodeStatus": "کے تحت معائنہ Qr Code",
+  "@qrcodeStatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "interaction": "رابتے",
+  "@interaction": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notifications": "اطلاعات",
+  "@notifications": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "heatmaps": "نقشے",
+  "@heatmaps": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newsFeed": "خبریں",
+  "@newsFeed": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "precautions": "احتیاطی تدابیر",
+  "@precautions": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacypolicy": "حکمت عملی",
+  "@privacypolicy": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "scanCodeText": "جائزہ کیلئے کوڈ اسکین کیجئے",
+  "@scanCodeText": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "threadlevel": "Thread Level",
+  "@threadlevel": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "snackbar": "بےمحل اسکین",
+  "@snackbar": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "مدد",
+  "@help": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "donations": "مالی امداد",
+  "@donations": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "howitworks": "طریقۂ عمل",
+  "@howitworks": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "howitworksdis": "یہ نقشے آپ کو پاکستان میں کورونا کے متعلق صوبائی معلومات فراہم کرتے ہیں۔ کیسسز دیکھنے کیلیے کسی بھی صوبے پر کلک کریں۔",
+  "@howitworksdis": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  }
+}

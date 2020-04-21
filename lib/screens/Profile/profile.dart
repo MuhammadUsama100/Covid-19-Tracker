@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:coronavirus/screens/QrCodeScanner/qrScanner.dart';
 import 'package:coronavirus/screens/Qrcodes/qrcode.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,7 @@ class _UserProfileState extends State<UserProfile> {
                                   ),
                                 ),
                                 leading: Icon(Icons.score),
-                                title: Text("Risk Factor ",
+                                title: Text(AppLocations.of(context).riskFector,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -187,7 +188,7 @@ class _UserProfileState extends State<UserProfile> {
                         }
 
                         final snackBar = SnackBar(
-                          content: Text('Status Changed'),
+                          content: Text(AppLocations.of(context).changeStatus),
                         );
                         setState(() {});
                         Scaffold.of(context).showSnackBar(snackBar);
@@ -199,7 +200,7 @@ class _UserProfileState extends State<UserProfile> {
                           child: Center(
                             child: ListTile(
                               leading: Icon(Icons.insert_chart),
-                              title: Text("Change Status",
+                              title: Text(AppLocations.of(context).changeStatus,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)),
@@ -221,8 +222,8 @@ class _UserProfileState extends State<UserProfile> {
                             setState(() {});
                           });
                         else {
-                          final snackBar =
-                              SnackBar(content: Text('Irrelevant Scan'));
+                          final snackBar = SnackBar(
+                              content: Text(AppLocations.of(context).snackbar));
 
                           Scaffold.of(context).showSnackBar(snackBar);
                         }
@@ -238,7 +239,7 @@ class _UserProfileState extends State<UserProfile> {
                                     style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold)),
-                                title: Text("Scan Report",
+                                title: Text(AppLocations.of(context).scanReport,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -254,7 +255,7 @@ class _UserProfileState extends State<UserProfile> {
                     builder: (context) => InkWell(
                       onTap: () {
                         showAlertDialog(context, Storage.getValue("UserID"),
-                            "Scan Code to change status code");
+                            AppLocations.of(context).scanCodeText);
                       },
                       child: Card(
                           elevation: 2,
@@ -263,7 +264,8 @@ class _UserProfileState extends State<UserProfile> {
                             child: Center(
                               child: ListTile(
                                 leading: Icon(Icons.score),
-                                title: Text("QR Code Status Change",
+                                title: Text(
+                                    AppLocations.of(context).qrcodeStatus,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),

@@ -1,0 +1,123 @@
+{
+  "@@last_modified": "2020-04-21T16:28:14.551904",
+  "homeScreen": "COVID-19",
+  "@homeScreen": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pakistanCases": "Pakistan Cases",
+  "@pakistanCases": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profilestatus": "Coronavirus Infection",
+  "@profilestatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "riskFector": "Risk Factor",
+  "@riskFector": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeStatus": "Change Status",
+  "@changeStatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "scanReport": "Scan Report",
+  "@scanReport": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "qrcodeStatus": "QR Code Status Change",
+  "@qrcodeStatus": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "interaction": "Interaction List",
+  "@interaction": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "heatmaps": "Heat Maps",
+  "@heatmaps": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newsFeed": "News Feed",
+  "@newsFeed": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "precautions": "Precautions",
+  "@precautions": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacypolicy": "Privacy Policy",
+  "@privacypolicy": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "scanCodeText": "Scan Code to change status",
+  "@scanCodeText": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "threadlevel": "Thread Level",
+  "@threadlevel": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "snackbar": "Irrelevant Scan",
+  "@snackbar": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "Help",
+  "@help": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "donations": "Donations",
+  "@donations": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "howitworks": "How Map Works",
+  "@howitworks": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "howitworksdis": "The maps use real time data to keep you updated with the numbers and figures related to Corona Virus. Click on each region to see the the details of specific part of the country.",
+  "@howitworksdis": {
+    "description": "COVID19Tracker",
+    "type": "text",
+    "placeholders": {}
+  }
+}

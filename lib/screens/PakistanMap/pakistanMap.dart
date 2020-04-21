@@ -1,5 +1,6 @@
 import 'package:coronavirus/Utils/htmlparser.dart';
 import "package:coronavirus/constants/constantcolor.dart";
+import 'package:coronavirus/locals/locals.dart';
 import 'package:coronavirus/screens/Donations/Donations.dart';
 import 'package:coronavirus/screens/Help/helpscreen.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +35,14 @@ class _PakistanMapState extends State<PakistanMap> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
-            title: Text('View Donations'),
+            title: Text(AppLocations.of(context).donations),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.help),
-            title: Text('Help'),
+            title: Text(AppLocations.of(context).help),
           ),
         ],
         currentIndex: index,
@@ -53,7 +54,7 @@ class _PakistanMapState extends State<PakistanMap> {
               MaterialPageRoute(builder: (context) => DonationsScreen()),
             );
           } else {
-            showAlertHelp(context, "How Maps Work");
+            showAlertHelp(context, AppLocations.of(context).howitworks);
           }
         },
       ),
@@ -70,7 +71,7 @@ class _PakistanMapState extends State<PakistanMap> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Pakistan Cases",
+                    Text(AppLocations.of(context).pakistanCases,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,

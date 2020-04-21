@@ -27,6 +27,7 @@ Future<void> positionCheck(Firestore _db) async {
           if (compare(currentuser, alluser) && doc["email"] != user["email"]) {
             var friends = user["friends"];
             bool alreadyFriend = false;
+            bool threadchange = false;
             bool statusUpdate = false;
             bool updateDate = false;
             for (int k = 0; k < friends.length; k++) {
@@ -45,7 +46,8 @@ Future<void> positionCheck(Firestore _db) async {
                     }
                   }
                   ref.updateData({"friends": friends});
-                }
+                } else if (friends[k]["thread"]["percent"] !=
+                    doc["thread"]["percent"]) threadchange = true;
               }
             }
             if (!alreadyFriend) {
@@ -62,12 +64,24 @@ Future<void> positionCheck(Firestore _db) async {
               });
               ref.updateData({"friends": friends});
             }
+
             if (statusUpdate) {
               for (int k = 0; k < friends.length; k++) {
                 if (friends[k]["email"] == doc["email"]) {
                   if (friends[k]["status"] != doc["status"]) {
                     friends[k]["status"] = doc["status"];
                     friends[k]["check"] = 0;
+                  }
+                }
+              }
+              ref.updateData({"friends": friends});
+            }
+            if (threadchange) {
+              for (int k = 0; k < friends.length; k++) {
+                if (friends[k]["email"] == doc["email"]) {
+                  if (friends[k]["thread"]["percent"] !=
+                      doc["thread"]["percent"]) {
+                    friends[k]["thread"]["percent"] = doc["thread"]["percent"];
                   }
                 }
               }

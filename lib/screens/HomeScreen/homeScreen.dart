@@ -1,12 +1,13 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronavirus/Models/friend.dart';
-import 'package:coronavirus/Models/tracker.dart';
+
 import 'package:coronavirus/Utils/chacknetwork.dart';
 import 'package:coronavirus/Utils/coronaData/coronaService.dart';
 import 'package:coronavirus/Utils/localStorage.dart';
 import 'package:coronavirus/Utils/tracker.dart';
 import 'package:coronavirus/constants/constantcolor.dart';
+import 'package:coronavirus/locals/locals.dart';
 import 'package:coronavirus/screens/Drawer/drawer.dart';
 import 'package:coronavirus/screens/PakistanMap/pakistanMap.dart';
 import 'package:flutter/services.dart';
@@ -105,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: Drawer(child: DrawerScreen()),
       appBar: AppBar(
-        title: Text(homePage),
+        title: Text(AppLocations.of(context).homeScreen),
         backgroundColor: theamColor,
       ),
       body: this.coronaData == null
