@@ -137,13 +137,22 @@ class _UserProfileState extends State<UserProfile> {
                                       CircularProgressIndicator(
                                         backgroundColor: theamColor,
                                         strokeWidth: 3,
-                                        value: data["thread"]["percent"] / 100,
+                                        value: data["thread"]["percent"] == 0
+                                            ? 0
+                                            : (data["thread"]["percent"] /
+                                                    100) +
+                                                0.43,
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
-                                        child: Text(data["thread"]["percent"]
-                                            .toString()),
+                                        child: (Text(
+                                            (data["thread"]["percent"] == 0
+                                                    ? 0
+                                                    : data["thread"]
+                                                            ["percent"] +
+                                                        43)
+                                                .toString())),
                                       ),
                                     ],
                                   ),

@@ -160,7 +160,7 @@ Future<void> threadLevelClassifier(Firestore _db) async {
     }
     print("anas2");
   }
-  percent = (percent / (count * 100)) * 100;
+  percent = ((percent / (count * 100)) * 100) ;
   print(percent);
   ref.updateData({
     "thread": {"percent": percent, "threadDate": DateTime.now().day}

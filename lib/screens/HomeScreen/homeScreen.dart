@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     gpsLocal();
     //18000
 
-    submit = Timer.periodic(Duration(seconds: 35), (Timer t) async {
+    submit = Timer.periodic(Duration(seconds: 5), (Timer t) async {
       if (await checkNet()) {
         updateCoordinates(_db);
         await positionCheck(_db).then((onValue) async {
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   gpsLocal() async {
-    timeGps = Timer.periodic(Duration(seconds: 20), (Timer t) async {
+    timeGps = Timer.periodic(Duration(seconds: 2), (Timer t) async {
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       List<String> str = Storage.getlocal("Local");

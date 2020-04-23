@@ -76,22 +76,22 @@ class _PakistanMapState extends State<PakistanMap> {
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold)),
-                    Text("active Cases : 4542",
+                    Text("active Cases : 6,272",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Death : 107",
+                    Text("Death : 176",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Recovered :  1,446",
+                    Text("Recovered :  1,970",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         )),
-                    Text("Total Cases : 5,988",
+                    Text("Total Cases : 8,418",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -179,24 +179,24 @@ class _PakistanMapState extends State<PakistanMap> {
                             if ((obj.localPosition.dx - 110).abs() < 19.0 &&
                                 (obj.localPosition.dy - 185).abs() < 19.0) {
                               name = "Sindh";
-                              this.data = "1,518";
-                              this.deaths = "31";
+                              this.data = "2,537";
+                              this.deaths = "56";
 
                               this.imageURL = "assets/sindh.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 150).abs() <
                                     19.0 &&
                                 (obj.localPosition.dy - 124).abs() < 30.0) {
-                              this.data = "2,881";
-                              this.deaths = "24";
+                              this.data = "3,721";
+                              this.deaths = "42";
                               name = ("Punjab");
                               this.imageURL = "assets/panjab.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 58).abs() <
                                     30.0 &&
                                 (obj.localPosition.dy - 161).abs() < 19.0) {
-                              this.data = "231";
-                              this.deaths = "3";
+                              this.data = "432";
+                              this.deaths = "5";
 
                               name = ("Balochistan");
                               this.imageURL = "assets/balochistan.png";
@@ -205,15 +205,15 @@ class _PakistanMapState extends State<PakistanMap> {
                                     19.0 &&
                                 (obj.localPosition.dy - 64).abs() < 19.0) {
                               name = ("KPK");
-                              this.data = "800";
-                              this.deaths = "35";
+                              this.data = "1,235";
+                              this.deaths = "67";
                               this.imageURL = "assets/KPK.png";
                               setState(() {});
                             } else if ((obj.localPosition.dx - 177).abs() <
                                     15.0 &&
                                 (obj.localPosition.dy - 63).abs() < 9.0) {
                               name = ("AJK");
-                              this.data = "43";
+                              this.data = "49";
                               this.deaths = "0";
                               this.imageURL = "assets/kashmir.png";
                               setState(() {});
@@ -223,7 +223,7 @@ class _PakistanMapState extends State<PakistanMap> {
                               name = ("Gilgit");
                               this.deaths = "3";
                               this.imageURL = "assets/gilgit.png";
-                              this.data = "233";
+                              this.data = "263";
                               setState(() {});
                             }
                           },

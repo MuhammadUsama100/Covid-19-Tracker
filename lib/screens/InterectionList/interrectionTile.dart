@@ -24,7 +24,7 @@ class _UserTileState extends State<UserTile> {
           elevation: 10,
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
-            title: Text(widget.name),
+            title: Text(widget.email),
             trailing: Container(
                 width: 50,
                 child: Column(
