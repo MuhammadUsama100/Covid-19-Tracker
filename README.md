@@ -1,16 +1,7 @@
-# coronavirus
+# Covid-19 Tracker
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+• Contact Tracing application that detects potential covid positive patients using GPS.
+• The possible transmission is checked in 14 tiers of contact and the risk factor is determined based on the position in the tier relative to the person in contact.
+• The data for contact is stored for each user for a period of 14 days
+• Application was developed using Flutter and Backend was done using firebase and Firebase Functions.
+Technology Stack: Flutter, BLE Low Energy, Java, Firebase Firestore, Firebase Notifications, Firebase Auth, Firebase Functions
